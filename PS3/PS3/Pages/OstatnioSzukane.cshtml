@@ -1,0 +1,20 @@
+﻿@page
+@model PS3.Pages.OstatnioSzukaneModel
+@{
+    ViewData["Title"] = "Ostatnie Wyszukiwanie";
+}
+<div class="text-center">
+    <label>Ostatnie wyszukiwanie: </label><br />
+    <table class=" text-center">
+        <tr>
+            <th>Wynik</th>
+            <th>Numer</th>
+            <th>Data</th>
+        </tr>
+        <tr>
+            <td>@Model.Result</td>
+            <td>@Model.Number</td>
+            <td>@Model.DateTime</td>
+        </tr>
+    </table>
+</div>
