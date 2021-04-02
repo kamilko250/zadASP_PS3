@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PS3.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.EntityFrameworkCore;
 namespace PS3
 {
     public class Startup
@@ -19,10 +20,15 @@ namespace PS3
         }
 
         public IConfiguration Configuration { get; }
+        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<FizzBuzzContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("FizzBuzzing"));
+            });
             services.AddRazorPages();
             services.AddMemoryCache();
             services.AddSession(options =>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,12 +9,20 @@ namespace PS3.Models
 {
     public class FizzBuzz
     {
+        [Key]
+        public int ID { get; set; }
+
         [Display(Name = "Liczba od 1 do 1000")]
         [Range(1, 1000, ErrorMessage = "Podaj liczbe z zakresu 1 - 1000.")]
         [Required(ErrorMessage = "Podaj liczbe")]
         public int? Number { get; set; }
+        [MaxLength(6)]
+        [Column(TypeName="varchar(6)")]
+        public string Result { get; set; }
 
-        public string FizzBuzzing() 
+        public DateTime DateTime { get; set; }
+
+        public void FizzBuzzing() 
         {
             string result = "";
             if (Number % 3 == 0)
@@ -22,7 +31,8 @@ namespace PS3.Models
             if (Number % 5 == 0)
                 result += "Buzz";
 
-            return result == string.Empty ? Number.ToString() : result;
+            Result = result == string.Empty ? Number.ToString() : result;
+            DateTime = DateTime.Now;
         }
 
 
